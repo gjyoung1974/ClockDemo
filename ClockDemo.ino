@@ -1,11 +1,11 @@
-#include <TimeLib.h>
-#include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
+//#include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
 #include "SSD1306Wire.h" // legacy include: `#include "SSD1306.h"`
 #include <Arduino.h>
 #include <WiFiMulti.h>
 
 /* Time Stamp */
 #include <NTPClient.h>
+#include <TimeLib.h>
 
 //SDA SSD1306 Display
 #include "SSD1306.h"
@@ -56,7 +56,7 @@ void clockOverlay(OLEDDisplay *display, OLEDDisplayUiState* state) {
 }
 
 void analogClockFrame(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int16_t y) {
-//  ui.disableIndicator();
+  //  ui.disableIndicator();
 
   // Draw the clock face
   //  display->drawCircle(clockCenterX + x, clockCenterY + y, clockRadius);
@@ -121,9 +121,8 @@ void setup() {
   Serial.println("Connect wifi and init NTP");
   Serial.println("");
   connectWiFi();
-  timeClient.begin();
-  setTime(timeClient.getEpochTime());
-
+  timeClient.begin();// Get the time
+  setTime(timeClient.getEpochTime()); // Set the clock
 
   // The ESP is capable of rendering 60fps in 80Mhz mode
   // but that won't give you much time for anything else
@@ -188,7 +187,6 @@ void loop() {
   int remainingTimeBudget = ui.update();
   
   if (remainingTimeBudget > 0) {
-
     delay(remainingTimeBudget);
 
   }
