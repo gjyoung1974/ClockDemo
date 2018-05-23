@@ -16,16 +16,16 @@
 // Include custom images
 #include "images.h"
 
-#define SDA_PIN 21// GPIO21 -> SDA
-#define SCL_PIN 22// GPIO22 -> SCL
-#define SSD_ADDRESS 0x3c
-
-const char* ssid     = "shrutefarms2";
-const char* password = "Password1!Password1!";
-
+// Connect to WiFi and get the time
+const char* ssid     = "<your SSID";
+const char* password = "<your Password>";
 #define NTP_OFFSET  -7  * 60 * 60 // In seconds
 #define NTP_INTERVAL 60 * 1000    // In miliseconds
 #define NTP_ADDRESS  "0.pool.ntp.org"
+
+#define SDA_PIN 21// GPIO21 -> SDA
+#define SCL_PIN 22// GPIO22 -> SCL
+#define SSD_ADDRESS 0x3c
 
 SSD1306  display(SSD_ADDRESS, SDA_PIN, SCL_PIN);
 
@@ -179,7 +179,6 @@ void connectWiFi(void)
   Serial.println(WiFi.localIP());
   
 }
-
 
 void loop() {
 
